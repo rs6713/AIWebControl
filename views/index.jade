@@ -13,7 +13,10 @@ block content
       .item 
         svg(version="1.1", id="Layer_1", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink", x="0px", y="0px",viewBox="0 0 900 660", style="enable-background:new 0 0 1920 1080;", xml:space="preserve")
           path(class="st0", d="M15.5,45.5l335-21l325,36l-372,31l11,329l368-90l-22-24l-311,71l-11-257l311-28l-96,56c0,0-52-10-103-3s-91,28-91,28l7,164c0,0,55-2,106-14s87-25,87-25l-169,6l142-41l-147,6l153-51l-168,4l177-39l-174,12l180-47l14,149l93,9l-4-215l17-25l9,264l201,115l3,57l-359,131l-10-65l356-118l-121-62l-319,89l98,72l14-5l-86-70l29-9l81,72l26-8l-77-72l27-7l78,70l23-7l-73-71l27-6l74,68l27-9l-74-68l25-7l72,66l27-9l-75-65l22-5l74,61l26-8l-81-58l22-7l88,56l-300,102l-22-19l316-105l-31-18l-309,97l32,54l-199-142l205,209l-206-78l1-131l-299-122v123l298,130l-298-252l288-208L15.5,45.5V299")
-        .wimage In the 1960's many thought AI could be achieved by emulating high level human thinking, through a series of decisions. For example if it is raining and i am outside, i should wear a coat
+        .wimage In the 1960's many thought AI could be achieved by emulating high level human thinking, through a series of decisions. 
+          br
+          br
+          |For example if it is raining and I am outside, I should wear a coat.
       .item
         img(src="images/robot.png")
         //svg(version="1.1", id="Layer_1", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink", x="0px", y="0px",viewBox="0 0 120 110", style="enable-background:new 0 0 1920 1080;", xml:space="preserve")  
@@ -32,16 +35,21 @@ block content
           br
           br
           |If given unfamiliar input it won't know what to do.
+      span.iterim
+        h2  The solution?
       .item
         div 
           h2 Machine learning
           | A field of computer science where a computer can learn without being explicitly programmed.
+
       .item
         div 
           | One form of machine learning is where the AI is trained/taught using a set of labelled inputs.
           br
           br
-          | Essentially all machines are just trying to answer questions. By giving them enough example questions and answers they can learn how to answer, like a child given a maths book with half the answers filled in.
+          | Essentially all machines are just trying to answer questions. By giving them enough example questions and answers they can learn how to produce the solutions. Like a child given a maths book with half the answers filled in.
+      span.iterim
+        h2  How can this be done?      
       .item
         img(src="images/brain.png")
         .wimage
@@ -60,12 +68,53 @@ block content
         div The more data we give the machine, the more it can learn, the better it can answer a wider variety of questions. 
           br
           br
-          |This is why companies collect huge amounts of data.
+          |This is why companies collect huge amounts of data.       
       .item
-        div One key use of machine learning is computer vision, giving machines the ability to recognize shapes and patterns from raw pixel data. This has numerous applications from person identification and emotion detection to robot auto-navigation.
+        div 
+          h2 Applications of Machine Learning
+          |One key use of machine learning is computer vision, giving machines the ability to recognize shapes and patterns from raw pixel data, with numerous applications.
+          .images
+            div
+              img(src="images/emotion.png")
+              | Emotion Detection
+            div
+              img(src="images/cctv.png")
+              | Person identification
+            div
+              img(src="images/vision.png")
+              | Robotics Auto-Navigation
       .item 
         #demoHolder
           h2 Demo
           | Now you can teach this computer a set of gestures captured on the web cam, and use them to trigger actions.
         #demo Start
+  #demoContainer
+    #demoMenu 
+      div 
+        h2 Create
+      div 
+        h2 Connect
+      div 
+        h2 Run
+    #demoContent 
+      
+      .triggers
+        div(ng-repeat="i in [0,1,2]")
+          h2 No trigger exists
+      #createTrigger
+        #triggerconsole
+          input(ng-model="newTrigger")
+          video
+          canvas#canvas
+          #imgCaptures
+            img(ng-repeat="image in newImages", src="{{image}}")
+              
+        #triggercontrols
+          #record(ng-mousedown="getImages()", ng-mouseup="stopImages()") 
+            h2 Record
+          #submittrigger
+            h2 Submit
+      .triggers
+        div(ng-repeat="i in [3,4,5]")
+          h2 No trigger exists
 
