@@ -90,31 +90,84 @@ block content
         #demo Start
   #demoContainer
     #demoMenu 
-      div 
+      #createnav
         h2 Create
-      div 
+      #connectnav 
         h2 Connect
-      div 
+      #runnav
         h2 Run
-    #demoContent 
-      
-      .triggers
-        div(ng-repeat="i in [0,1,2]")
-          h2 No trigger exists
-      #createTrigger
-        #triggerconsole
-          input(ng-model="newTrigger")
-          video
-          canvas#canvas
+    #demoMain
+      #demoConnect
+        #triggersConnect
+          div(ng-repeat="trigger in triggers track by $index")
+            h2 {{trigger.name}}
+            div
+              img(src="{{trigger.images[0]}}")
+            .triggerConnector(ng-click="triggerActive($index)")
+        svg(id="actiontriggerpaths")
+        #actionsConnect
+          .actionContainer(ng-repeat="col in colours track by $index", ng-style="{backgroundColor: col}")
+            .triggerConnector(ng-click="actionActive($index)")
+      #demoRun
+        #demoRunVisuals
+          #demoRunVideo
+            video#demorun
+            canvas
+          i.fas.fa-arrow-alt-right
+          #demoRunResult
+            #resultSymbol
+            #resultVideo
+              div
+                img(src="{{triggers[0].images[0]}}")
+            md-progress-linear(md-mode="determinate", value="{{resultConfidence}}")
+        #demoRunControls
+          #modelProperties
+            h2 Model: {{modelStatus}}
+            h2 Accuracy: {{modelAccuracy}}
+          #trainModel 
+            h2 Train
+          #runModel 
+            h2 Run
+
+        
+
+      #demoContent 
+        .triggers
+          div(ng-repeat="i in [0,1,2]", ng-style="{border: triggerType(i)}")
+            .triggerContainer(ng-if="(i+1)<=triggers.length")
+              h2 {{triggers[i].name}}
+              div
+                img(src="{{triggers[i].images[0]}}")
+            h2(ng-if="(i+1)>triggers.length") No trigger exists
+            
+        #createTrigger
+          #triggerconsole
+            input(ng-model="newTrigger", placeholder="Trigger Name")
+            video#triggerCapture
+            canvas#canvas
+            md-progress-linear(md-mode="determinate", value="{{noTriggers()}}")
           #imgCaptures
-            img(ng-repeat="image in newImages", src="{{image}}")
-              
-        #triggercontrols
-          #record(ng-mousedown="getImages()", ng-mouseup="stopImages()") 
-            h2 Record
-          #submittrigger
-            h2 Submit
-      .triggers
-        div(ng-repeat="i in [3,4,5]")
-          h2 No trigger exists
+            div(ng-repeat="image in newImages track by $index" )
+              img(src="{{image}}")
+              #deleteImg(ng-click="removeImage($index)") X
+                
+          #triggercontrols
+            #record(ng-click="toggleRecord()") 
+              h2 	&#x25CF;
+              span(ng-if="!captureFootage") &#x25CF;
+              span(ng-if="captureFootage") &#x25A0;
+            #submittrigger(ng-click="submitTrigger()", style="{{submitTriggerFormat()}}")
+              h2 Submit
+        .triggers
+          div(ng-repeat="i in [3,4,5]", ng-style="{border: triggerType(i)}")
+            .triggerContainer(ng-if="(i+1)<=triggers.length")
+              h2 {{triggers[i].name}}
+              div
+                img(src="{{triggers[i].images[0]}}")
+            h2(ng-if="(i+1)>triggers.length") No trigger exists
+            
+
+//ng-style="{backgroundColor: data.backgroundCol}"
+//or style="{{functiontocheck}}"
+//or if altering pre-existing directives can do purely in js
 

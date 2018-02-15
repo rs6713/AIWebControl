@@ -70,8 +70,10 @@
    
    #canvas{
      display:block;
-     width:160px;
-     height:90px;
+     width:164px;
+     height:123px;
+     background-color:red;
+     display:none;
    }
    
    
@@ -312,27 +314,37 @@
     color:white;
     visibility:hidden;
     z-index:20;
+    display:flex;
+    flex-direction: column;    
+  }
+
+
+
+  #demoMain{
+    width:100%;
+    flex:1;
   }
   #demoMenu{
-    width:15%;
-    height:100%;
+    width:100%;
     float:left;
     background-color: #351B43;
-    padding: 10vh 0 10vh 1em ;
+    padding: 1em 2em;
     box-sizing:border-box;
+    color:white;
   }
     #demoMenu div{
-      cursor:pointer;
-      background-color:#A442D9;
-      margin-bottom:1em;
-      width:100%;
       float:right;
       box-sizing:border-box;
-      padding-left:1em;
+      padding-left:2em;
+    }
+    #demoMenu div h2{
+      cursor:pointer;
+    }
+    #demoMenu div h2{
+
     }
   #demoContent{
-    float:left;
-    width:85%;
+    width:100%;
     height:100%;
     background-color: white; 
     color:#222222;
@@ -344,15 +356,57 @@
     box-sizing:border-box;
     display:flex;
     flex-direction: column;
-    justify-content: space-between;
-    -webkit-align-items: center; 
-    align-items: center;    
+    justify-content: space-between;  
     float:left;
   }
+  .triggers:first{
+    -webkit-align-items: left; 
+    align-items: left;  
+  }
+  .triggers:last{
+    -webkit-align-items: right; 
+    align-items: right;  
+  }
+
+  .triggers .triggerContainer{
+    border:none;
+    width:100%;
+    height:100%;
+  }
+  .triggers .triggerContainer div{
+    width:100%;
+    height:0;
+    padding-top: 75%; 
+    position:absolute;
+    left:0;
+    bottom:-1px;
+    box-sizing:content-box;
+    content:"";
+    border:none;
+  }
+
+  .triggers .triggerContainer div img{
+    width:100%;
+    height:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    
+    
+  }
+  .triggers .triggerContainer  h2{
+    position:initial;
+    transform:none;
+    padding-top:0.5em;
+    color:#222222;
+  }
+
+
     .triggers div{
       height:25%;
       width:20vh;
-      border: 0.65em dashed #dddddd;
+      position:relative;
+      /*border: 0.65em dashed #dddddd;*/
       text-align:center;
       box-sizing:border-box;
       color: #dddddd;
@@ -371,6 +425,8 @@
     box-sizing:border-box;
     float:left;
   }
+
+
     #createTrigger #triggerconsole{
       height:85%;
       background-color:#dddddd;
@@ -381,8 +437,49 @@
       flex-flow: column;
       box-sizing:border-box;
       padding:1em;
-
+      
     }
+    #createTrigger #triggerconsole input{
+      color:#222222;
+      background:none;
+      border:none;
+      font-size:1.5em;
+      font-weight:bold;
+    }
+    #createTrigger #triggerconsole md-progress-linear{
+      
+      height:1em;
+    }
+      #createTrigger #triggerconsole md-progress-linear .md-bar{
+        background-color:#A442D9;
+        height:1em;
+      }
+      #createTrigger #triggerconsole md-progress-linear .md-container{
+        background-color:#C22614;
+        height:1em;
+      }
+      #createTrigger #triggerconsole #imgCaptures #deleteImg:hover{
+        opacity:1;
+      }
+      #createTrigger #triggerconsole #imgCaptures #deleteImg{
+        height:100%;
+        width:100%;
+        padding:0;
+        position:absolute;
+        top:0;
+        left:0;
+        background-color: rgba(0,0,0,0.2);
+        color:white;
+        opacity:0;
+        z-index:2;
+        text-align:right;
+        padding:0.2em;
+        box-sizing:border-box;
+        font-size:2em;
+        font-weight:bold;
+        line-height:100%;
+        cursor:pointer;
+      }
 
       #createTrigger #triggerconsole video{
         width:100%;
@@ -393,19 +490,32 @@
         overflow-y:scroll;
         width:100%;
         flex:1;
-        padding:1em;
+        padding:1em 0em;
         box-sizing:border-box;
         display:grid;
         justify-content: space-between;
-        grid-template-columns: 30% 30% 30%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-column-gap:0.5em;
+        grid-row-gap:0.5em;
         grid-auto-flow:row;
 
       }
-      #imgCaptures img{
+      #imgCaptures div {
         width:100%;
-        padding:1em 0em;
-        display:inline-block;
-        box-sizing:border-box;
+        height:0;
+        padding-top: 75%; 
+        position:relative;
+        box-sizing:content-box;
+        content:"";
+      }
+
+
+      #imgCaptures div img{
+        width:100%;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:0;
       }
 
     #createTrigger #triggercontrols{
@@ -415,14 +525,279 @@
       justify-content: space-between;
       align-items: flex-end;
     }
-      #record{
+      #createTrigger #triggercontrols #record{
         background-color:#C22614;
+        position:relative;
+        cursor:pointer;
       }
+      #createTrigger #triggercontrols #record span{
+        position:absolute;
+        
+        top:50%;
+        left:50%;   
+        font-size:3em;    
+        transform: translateX(-50%) translateY(-50%);
+      }
+      
       #createTrigger #triggercontrols div{
-        background-color:#24764C;
+        /*background-color:#24764C;*/
         color:white;
         border-radius:2em;
         text-align:center;
         padding: 0.5em 3em;
-        cursor: pointer;
+        /*cursor: pointer;*/
       }
+  
+  #demoConnect{
+    width:100%;
+    height:100%;
+    background-color: white; 
+    color:#222222;
+    display:none;
+  }
+    #demoConnect #triggersConnect{
+      width:100%;
+      height:20%;
+      box-sizing:border-box;
+      padding:0% 1em 0em 1em;
+      margin-top:10vh;
+      position:absolute;
+      top:0;
+      left:0;
+      display:grid;
+      z-index:20;
+      justify-content: space-between;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-column-gap:2em;
+      grid-row-gap:0.5em;
+      grid-auto-flow:row;
+      
+    }
+      #demoConnect #triggersConnect div{
+        width:100%;
+        padding-top:90%;
+        height:0;
+        position:relative;
+        border: 0.65em solid #351B43;
+        text-align:center;
+        box-sizing:border-box;
+        color: #dddddd;        
+      }
+
+      #demoConnect #triggersConnect div div{
+        width:100%;
+        height:0;
+        padding-top: 75%; 
+        position:absolute;
+        left:0px;
+        bottom:-1px;
+        box-sizing:content-box;
+        content:"";
+        border:none;
+      }
+    
+      #demoConnect #triggersConnect div div img{
+        width:100%;
+        height:100%;
+        position:absolute;
+        bottom:0;
+        left:0; 
+      }
+
+      #demoConnect #triggersConnect div  h2{
+        position:absolute;
+        top:0;
+        margin:0;
+        transform:none;
+        padding-top:0.5em;
+        color:#222222;
+      }
+      #demoConnect #triggersConnect div .triggerConnector{
+        width:15%;
+        padding-top:15%;
+        background-color:white;
+        border: 0.65em solid #dddddd;
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        top:120%;
+        border-radius:100%;
+      }
+
+      #demoConnect #actiontriggerpaths{
+        width:100%;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:0;
+        stroke: #dddddd;
+        fill: none;
+        stroke-width: 0.65em;
+        stroke-linecap: round;
+        transform-origin: 0px 0px 0px;
+        cursor:pointer;
+      }
+      #triggersConnect h2{
+        width:100%;
+      }
+
+      #demoConnect #actionsConnect{
+        width:100%;
+        height:20%;
+        box-sizing:border-box;
+        padding:0% 1em 0em 1em;
+        margin-bottom:5vh;
+        position:absolute;
+        bottom:0;
+        left:0;
+        display:grid;
+        justify-content: space-between;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-column-gap:2em;
+        grid-row-gap:0.5em;
+        grid-auto-flow:row; 
+      }
+      #demoConnect #actionsConnect .actionContainer{
+        position:relative;
+        width:100%;
+        height:0;
+        padding-top:100%;
+        background-image: url("../images/led.png");
+        background-size:cover;
+      }
+      #demoConnect #actionsConnect .actionContainer .triggerConnector{
+        width:15%;
+        padding-top:15%;
+        background-color:white;
+        border: 0.65em solid #dddddd;
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        top:-25%;
+        border-radius:100%;
+      }
+
+      #demoContainer #demoRun{
+        background-color:white;
+        float:left;
+        width:100%;
+        height:100%;
+        color:#222222;
+        display:none;
+      }
+      #demoRun #demoRunVisuals{
+        width:100%;
+        height:80%;
+        padding:2em;
+        padding-top:10vh;
+        box-sizing:border-box;
+        color:#222222;
+      }
+        #demoRun #demoRunVisuals #demoRunVideo{
+          width:30%;
+          float:left;
+          padding:1em;
+          background-color:#dddddd;
+          border:0.65em solid #351B43;
+          border-radius:1em;
+          box-sizing:border-box;
+          
+        }
+          #demoRun #demoRunVisuals #demoRunVideo video{
+            width:100%;
+          }
+        #demoRun #demoRunVisuals #demoRunResult{
+          width:60%;
+          float:right;
+          box-sizing:border-box;
+          position:relative;
+        }
+
+          #demoRun #demoRunVisuals #demoRunResult #resultSymbol{
+            padding-top:45%;
+            width:45%;
+            height:0;
+            background-image: url("../images/led.png");
+            background-size:cover;
+            background-color:yellow;
+            float:left;
+          }
+          #demoRun #demoRunVisuals #demoRunResult #resultVideo{
+            width:45%;
+            float:right;
+            padding:1em;
+            background-color:#dddddd;
+            border:0.65em solid #351B43;
+            border-radius:1em;
+            box-sizing:border-box;
+          }
+
+          #demoRun #demoRunVisuals #demoRunVideo div{
+            width:100%;
+            padding-top:75%;
+          }
+          #demoRun #demoRunVisuals #demoRunVideo canvas{
+            width:164px;
+            height:123px;
+            display:none;
+          }
+
+            #demoRun #demoRunVisuals #demoRunResult #resultVideo div{
+              width:100%;
+              padding-top: 75%;
+              height:0;
+              position:relative;
+            }
+            #demoRun #demoRunVisuals #demoRunResult #resultVideo img{
+                width:100%;
+                height:100%;
+                position:absolute;
+                top:0em;
+            }
+            #demoRun #demoRunVisuals #demoRunResult md-progress-linear{
+              width:100%;
+              height:1em;
+            }
+            #demoRun #demoRunVisuals #demoRunResult md-progress-linear .md-bar{
+              background-color:#A442D9;
+              height:1em;
+            }
+            #demoRun #demoRunVisuals #demoRunResult md-progress-linear .md-container{
+              background-color:#C22614;
+              height:1em;
+            }
+        
+
+      #demoRun #demoRunControls{
+        width:100%;
+        height:10%;
+        padding:2em;
+        box-sizing:border-box;
+      }
+
+        #demoRun #demoRunControls #modelProperties{
+          width:30%;
+          height:100%;
+          float:left;
+        }
+        #demoRun #demoRunControls #modelProperties h2:first-child{
+          margin-top:0;
+        }
+
+        #demoRun #demoRunControls #trainModel{
+          float:right;
+          background-color:#24764C;
+          color:white;
+          border-radius:2em;
+          text-align:center;
+          padding: 0.5em 3em;
+          margin-left:1em;
+        }
+        #demoRun #demoRunControls #runModel{
+          float:right;
+          background-color:#24764C;
+          color:white;
+          border-radius:2em;
+          text-align:center;
+          padding: 0.5em 3em;
+        }
