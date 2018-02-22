@@ -69,9 +69,8 @@
    }
    
    #canvas{
-     display:block;
-     width:164px;
-     height:123px;
+     width:41px;
+     height:30px;
      background-color:red;
      display:none;
    }
@@ -328,7 +327,7 @@
     width:100%;
     float:left;
     background-color: #351B43;
-    padding: 1em 2em;
+    padding: 1em 5em 0em 5em;
     box-sizing:border-box;
     color:white;
   }
@@ -348,22 +347,23 @@
     height:100%;
     background-color: white; 
     color:#222222;
+    box-sizing:border-box;
+    padding: 5em 5em;
   }
   .triggers{
     width:30%;
     height:100%;
-    padding:10vh 0em 10vh 0em;
     box-sizing:border-box;
     display:flex;
     flex-direction: column;
     justify-content: space-between;  
     float:left;
   }
-  .triggers:first{
+  .triggers:first-child{
     -webkit-align-items: left; 
     align-items: left;  
   }
-  .triggers:last{
+  .triggers:last-child{
     -webkit-align-items: right; 
     align-items: right;  
   }
@@ -398,10 +398,12 @@
     position:initial;
     transform:none;
     padding-top:0.5em;
-    color:#222222;
+    color:#222222 ;
   }
 
-
+    .triggers:last-child div{
+      margin-left:auto;
+    }
     .triggers div{
       height:25%;
       width:20vh;
@@ -410,6 +412,7 @@
       text-align:center;
       box-sizing:border-box;
       color: #dddddd;
+      
     }
       .triggers div h2{
         position:relative;
@@ -420,31 +423,39 @@
   #createTrigger{
     width:40%;
     height:100%;
-    padding-top:10vh;
-    padding-bottom:10vh;
+    max-height:100%;
     box-sizing:border-box;
     float:left;
+    display: flex;
+    flex-flow: column;
+  }
+  input:focus {
+    outline:none;
+  }
+  :focus {
+    outline: none;
+    border: 0;
   }
 
-
     #createTrigger #triggerconsole{
-      height:85%;
-      background-color:#dddddd;
-      border:0.65em solid #351B43;
-      border-radius:1em;
       width:100%;
-      display: flex;
-      flex-flow: column;
-      box-sizing:border-box;
-      padding:1em;
-      
+      box-sizing:border-box;  
+      box-shadow: 0 0px 5px 0 rgba(0,0,0,.14), 0 0px 10px 0 rgba(0,0,0,.12), 0 0px 4px -1px rgba(0,0,0,.2);
+      margin-bottom:1em;
     }
-    #createTrigger #triggerconsole input{
-      color:#222222;
+    #createTrigger  input{
+      color:#222222; 
       background:none;
-      border:none;
+      border:0;
       font-size:1.5em;
       font-weight:bold;
+      padding-left:0.5em;
+      padding-top:0.5em;
+      padding-bottom:0.5em;
+      width:100%;
+    }
+    #createTrigger input::placeholder{
+      color:#dddddd;
     }
     #createTrigger #triggerconsole md-progress-linear{
       
@@ -458,10 +469,10 @@
         background-color:#C22614;
         height:1em;
       }
-      #createTrigger #triggerconsole #imgCaptures #deleteImg:hover{
+      #createTrigger #imgCaptures #deleteImg:hover{
         opacity:1;
       }
-      #createTrigger #triggerconsole #imgCaptures #deleteImg{
+      #createTrigger #imgCaptures #deleteImg{
         height:100%;
         width:100%;
         padding:0;
@@ -489,8 +500,11 @@
       #imgCaptures{
         overflow-y:scroll;
         width:100%;
-        flex:1;
-        padding:1em 0em;
+        -webkit-flex: 1 1 auto;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        height: 0px;
+        padding: 0em;
         box-sizing:border-box;
         display:grid;
         justify-content: space-between;
@@ -498,7 +512,11 @@
         grid-column-gap:0.5em;
         grid-row-gap:0.5em;
         grid-auto-flow:row;
-
+        align-content:start;
+        border: 2px solid #dddddd;
+        border-width: 1px;
+        box-shadow: inset 0 0 10px #dddddd;
+        padding:0.5em;
       }
       #imgCaptures div {
         width:100%;
@@ -519,7 +537,7 @@
       }
 
     #createTrigger #triggercontrols{
-      height:15%;
+      margin-top:1em;
       width:100%;
       display:flex;
       justify-content: space-between;
@@ -529,28 +547,33 @@
         background-color:#C22614;
         position:relative;
         cursor:pointer;
+        font-size:1.5em;
+        height:2.875em;
+        width:2.875em;
+        padding:0;
       }
       #createTrigger #triggercontrols #record span{
         position:absolute;
-        
+        background-color:white;
         top:50%;
         left:50%;   
-        font-size:3em;    
+        height:1.3em;
+        width:1.3em;
         transform: translateX(-50%) translateY(-50%);
       }
-      
       #createTrigger #triggercontrols div{
         /*background-color:#24764C;*/
         color:white;
-        border-radius:2em;
+        border-radius:1em;
         text-align:center;
-        padding: 0.5em 3em;
+        padding: 0em 2em;
         /*cursor: pointer;*/
       }
   
   #demoConnect{
     width:100%;
     height:100%;
+    position:relative;
     background-color: white; 
     color:#222222;
     display:none;
@@ -559,8 +582,8 @@
       width:100%;
       height:20%;
       box-sizing:border-box;
-      padding:0% 1em 0em 1em;
-      margin-top:10vh;
+      padding:0% 5em 0em 5em;
+      margin-top:5em;
       position:absolute;
       top:0;
       left:0;
@@ -645,8 +668,8 @@
         width:100%;
         height:20%;
         box-sizing:border-box;
-        padding:0% 1em 0em 1em;
-        margin-bottom:5vh;
+        padding:0% 5em 0em 5em;
+        margin-bottom:5em;
         position:absolute;
         bottom:0;
         left:0;
@@ -740,6 +763,9 @@
             width:164px;
             height:123px;
             display:none;
+          }
+          #tempcanvas{
+            background-color:red;
           }
 
             #demoRun #demoRunVisuals #demoRunResult #resultVideo div{

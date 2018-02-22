@@ -90,19 +90,19 @@ block content
         #demo Start
   #demoContainer
     #demoMenu 
-      #createnav
-        h2 Create
-      #connectnav 
-        h2 Connect
       #runnav
         h2 Run
+      #connectnav 
+        h2 Connect
+      #createnav
+        h2 Create
     #demoMain
       #demoConnect
         #triggersConnect
           div(ng-repeat="trigger in triggers track by $index")
             h2 {{trigger.name}}
             div
-              img(src="{{trigger.images[0]}}")
+              img(src="{{trigger.images[0].url}}")
             .triggerConnector(ng-click="triggerActive($index)")
         svg(id="actiontriggerpaths")
         #actionsConnect
@@ -118,15 +118,16 @@ block content
             #resultSymbol
             #resultVideo
               div
-                img(src="{{triggers[0].images[0]}}")
+                img(src="{{triggers[0].images[0].url}}")
             md-progress-linear(md-mode="determinate", value="{{resultConfidence}}")
         #demoRunControls
+          canvas(width=40, height=20)#tempcanvas
           #modelProperties
             h2 Model: {{modelStatus}}
             h2 Accuracy: {{modelAccuracy}}
-          #trainModel 
+          #trainModel(ng-click="trainModel()") 
             h2 Train
-          #runModel 
+          #runModel(ng-click="runModel()")
             h2 Run
 
         
@@ -137,25 +138,24 @@ block content
             .triggerContainer(ng-if="(i+1)<=triggers.length")
               h2 {{triggers[i].name}}
               div
-                img(src="{{triggers[i].images[0]}}")
+                img(src="{{triggers[i].images[0].url}}")
             h2(ng-if="(i+1)>triggers.length") No trigger exists
-            
+        //default chrome canvas width, height is 300,150   
         #createTrigger
           #triggerconsole
-            input(ng-model="newTrigger", placeholder="Trigger Name")
             video#triggerCapture
-            canvas#canvas
+            canvas(width=40, height=20)#canvas
+            input(ng-model="newTrigger", placeholder="Trigger Name")
             md-progress-linear(md-mode="determinate", value="{{noTriggers()}}")
           #imgCaptures
             div(ng-repeat="image in newImages track by $index" )
-              img(src="{{image}}")
+              img(src="{{image.url}}")
               #deleteImg(ng-click="removeImage($index)") X
-                
+                  
           #triggercontrols
-            #record(ng-click="toggleRecord()") 
-              h2 	&#x25CF;
-              span(ng-if="!captureFootage") &#x25CF;
-              span(ng-if="captureFootage") &#x25A0;
+            #record(ng-click="toggleRecord()", ng-style="{borderRadius: getBorderRadius()}") 
+              span(ng-if="!captureFootage", style="border-radius:100%") 
+              span(ng-if="captureFootage") 
             #submittrigger(ng-click="submitTrigger()", style="{{submitTriggerFormat()}}")
               h2 Submit
         .triggers
@@ -163,7 +163,7 @@ block content
             .triggerContainer(ng-if="(i+1)<=triggers.length")
               h2 {{triggers[i].name}}
               div
-                img(src="{{triggers[i].images[0]}}")
+                img(src="{{triggers[i].images[0].url}}")
             h2(ng-if="(i+1)>triggers.length") No trigger exists
             
 

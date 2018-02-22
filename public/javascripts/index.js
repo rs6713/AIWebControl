@@ -1,3 +1,11 @@
+import "babel-polyfill";
+import "babel-core/register";
+
+/*************************************************************
+Deeplearn.js Implementation
+************************************************************/
+
+
 
 var documentHeight=window.innerHeight;
 var $document=$(document.body);
@@ -90,11 +98,11 @@ function convertCanvasToImage(canvas) {
             var svg= document.getElementById("actiontriggerpaths");
             
             var newpath={};
-            path.setAttribute("x1",$(this).offset().left-$("#demoMenu").width());
+            path.setAttribute("x1",$(this).offset().left);
             path.setAttribute("y1",$(this).offset().top);
             svg.appendChild(path);
             newpath.path=path;
-            newpath.start=[$(this).offset().left-$("#demoMenu").width(), $(this).offset().top];
+            newpath.start=[$(this).offset().left, $(this).offset().top];
             newpath.stop=[];
             paths.push(newpath);
             activePath=$(this).parent().parent().attr('id');
@@ -105,6 +113,11 @@ function convertCanvasToImage(canvas) {
     }
 
 $(document).ready(function(){
+
+    video = document.getElementById("triggerCapture");
+    demovideo= document.getElementById("demorun");
+
+
     //canvas = document.getElementById('canvas');
     //context = canvas.getContext('2d');
     //context.drawImage(video,0,0, 160, 120);
@@ -146,14 +159,14 @@ $(document).ready(function(){
             var path = document.createElementNS('http://www.w3.org/2000/svg','line');
             var svg= document.getElementById("actiontriggerpaths");
             //console.log($('#actiontriggerpaths').css("stroke-width"), parseInt($('#actiontriggerpaths').css("stroke-width")));
-            var x1=$(this).offset().left-$("#demoMenu").width()+$(this).width()/2 - parseInt($('#actiontriggerpaths').css("stroke-width"))/2;
+            var x1=$(this).offset().left+$(this).outerWidth()/2 - parseInt($('#actiontriggerpaths').css("stroke-width"))/2;
             var y1;
             if($(this).parent().parent().attr('id')=="triggersConnect"){
                 //console.log($(this).outerHeight(), $(this).innerHeight(), $(this).css('padding-top'), parseInt($(this).css('padding-top')));
-                y1=$(this).offset().top+ parseInt($(this).css('padding-top'));
+                y1=$(this).offset().top+ parseInt($(this).css('padding-top'))- $("#demoMenu").innerHeight();
                 //console.log($(this).offset().top, $(this).css('padding-top'), y1);
             }else{
-                y1=$(this).offset().top;
+                y1=$(this).offset().top- $("#demoMenu").innerHeight();
             }
 
             path.setAttribute("x1",x1);
@@ -167,13 +180,13 @@ $(document).ready(function(){
         }
         if(activePath!=$(this).parent().parent().attr('id')){
             var current=paths[paths.length-1];
-            var x2=$(this).offset().left-$("#demoMenu").width()+$(this).width()/2 - parseInt($('#actiontriggerpaths').css("stroke-width"))/2;
+            var x2=$(this).offset().left+$(this).outerWidth()/2 - parseInt($('#actiontriggerpaths').css("stroke-width"))/2;
             var y2;
 
             if($(this).parent().parent().attr('id')=="triggersConnect"){
-                y2=$(this).offset().top+ parseInt($(this).css('padding-top'));
+                y2=$(this).offset().top+ parseInt($(this).css('padding-top'))- $("#demoMenu").innerHeight();
             }else{
-                y2=$(this).offset().top;
+                y2=$(this).offset().top- $("#demoMenu").innerHeight();
             }
             current.setAttribute("x2",  x2 );
             current.setAttribute("y2", y2 );
@@ -192,8 +205,8 @@ $(document).ready(function(){
             var svg= document.getElementById("actiontriggerpaths");
             //current.path.remove();
             
-            current.setAttribute("x2",  event.pageX-$("#demoMenu").width() );
-            current.setAttribute("y2", event.pageY );
+            current.setAttribute("x2",  event.pageX );
+            current.setAttribute("y2", event.pageY- $("#demoMenu").innerHeight() );
             //svg.appendChild(current.path);
         }
     });
@@ -230,3 +243,6 @@ $nodes.each( function( index ) {
       $("#contentContainer").animate({ scrollTop: (positions[ index ]- documentHeight-1)}, 1000 );
     });
 })
+
+
+
