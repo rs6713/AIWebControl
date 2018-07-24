@@ -110,21 +110,23 @@ block content
             .triggerConnector(ng-click="actionActive($index)")
       #demoRun
         #demoRunVisuals
-          #demoRunVideo
-            video#demorun
-            canvas
-          i.fas.fa-arrow-alt-right
-          #demoRunResult
-            #resultSymbol
-            #resultVideo
-              div
-                img(src="{{triggers[0].images[0].url}}")
+          #demoRunVideoContainer
+            #demoRunVideo
+              video#demorun
+              h2 INPUT
+              canvas(width=40, height=20)#demoruncanvas
+          #arrow
+            img(src="images/arrow.png")
             md-progress-linear(md-mode="determinate", value="{{resultConfidence}}")
+          #demoRunResult
+            #resultSymbol(ng-style="{backgroundColor: colours[modelResultAction]}")
+            h2 {{triggers[modelResult].name}} 
+            
         #demoRunControls
-          canvas(width=40, height=20)#tempcanvas
+          //canvas(width=40, height=20)#tempcanvas
           #modelProperties
-            h2 Model: {{modelStatus}}
-            h2 Accuracy: {{modelAccuracy}}
+            h2 Model: {{currentModel}}
+            h2 Accuracy: {{modelAccuracy}} %
           #trainModel(ng-click="trainModel()") 
             h2 Train
           #runModel(ng-click="runModel()")
@@ -134,7 +136,7 @@ block content
 
       #demoContent 
         .triggers
-          div(ng-repeat="i in [0,1,2]", ng-style="{border: triggerType(i)}")
+          div(ng-repeat="i in [0,1,2]", ng-style="triggerType(i)")
             .triggerContainer(ng-if="(i+1)<=triggers.length")
               h2 {{triggers[i].name}}
               div
@@ -159,7 +161,7 @@ block content
             #submittrigger(ng-click="submitTrigger()", style="{{submitTriggerFormat()}}")
               h2 Submit
         .triggers
-          div(ng-repeat="i in [3,4,5]", ng-style="{border: triggerType(i)}")
+          div(ng-repeat="i in [3,4,5]", ng-style="triggerType(i)")
             .triggerContainer(ng-if="(i+1)<=triggers.length")
               h2 {{triggers[i].name}}
               div
